@@ -4,7 +4,7 @@ import sqlite3
 DATABASE = "banco.bd"
 SECRET_KEY = "1234"
 
-app = Flask("Olá") #para utilizar os recursos do framework por essa variável
+app = Flask("Olá") 
 
 app.config.from_object(__name__)
 
@@ -20,8 +20,13 @@ def teardown_request(exception):
     g.bd.close()
 
 @app.route("/") 
-def alunos():
-    nomeUsuario = ["Danilo", "Caio", "Guilherme", None, "Cassio"]
-    return render_template("hello.html", nome=nomeUsuario)
+def exibir_posts():
+    sql = "SELECT  titulo, texto, data_criacao FROM posts ORDER BY id DESC"
+    resultado = g.bd.execute(sql)
+    posts = [
+        {"titulo":"Meu titulo", "texto":"Primeiro texto", "data_criacao":"23/11/22"},
+        {"titulo":"Meu titulo2", "texto":"Segundo texto", "data_criacao":"24/11/22"}
+    ]
+    return render_template("hello.html", post = posts)
 
  
