@@ -7,8 +7,16 @@
 
 
 <body>
-    <h1>Olá a todos</h1>
+    {% for nomeIt in nome %}
 
+    <h1>Olá
+        {% if not nomeIt %}
+            Visitante
+        {% else %}
+            {{ nomeIt}}
+        {% endif %}
+    </h1>
+    {% endfor %}
     <h2>Lista de Alunos não ordenada</h2>
     <ul>
         <li>Alessandro</li>
